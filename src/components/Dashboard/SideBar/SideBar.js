@@ -1,8 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../../App';
-import AddAdmin from '../../AddAdmin/AddAdmin';
-import AddService from '../../Service/AddService/AddService';
-import ManageService from '../../Service/ManageService/ManageService';
+import AddAdmin from '../../Admin/AddAdmin/AddAdmin';
+import AddService from '../../Admin/AddService/AddService';
+import ManageOrder from '../../Admin/ManageOrder/ManageOrder';
+import ManageService from '../../Admin/ManageService/ManageService';
+import BookedServices from '../../Client/BookedServices/BookedServices';
+import BookService from '../../Client/BookService/BookService';
+import Comment from '../../Client/Comment/Comment';
 
 const SideBar = ({setTab}) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -33,29 +37,29 @@ const SideBar = ({setTab}) => {
                         </a>
                     </li>
                     {
-                        loggedInUser?.email &&
+                        // loggedInUser?.email &&
                         <>
-                            <li class="nav-item pb-md-2">
-                                <a class="nav-link" href="#">
+                            <li class="nav-item pb-md-2" onClick={e => handleClick(e, <BookService></BookService>)}>
+                                <a class="nav-link" href="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
                                         <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
                                         <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                                     </svg>
-                                    <span class="ms-2">Book</span>
+                                    <span class="ms-2">Book Service</span>
                                 </a>
                             </li>
-                            <li class="nav-item pb-md-2">
-                                <a class="nav-link" href="#">
+                            <li class="nav-item pb-md-2" onClick={e => handleClick(e, <BookedServices></BookedServices>)}>
+                                <a class="nav-link" href="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
                                         <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
                                     </svg>
-                                    <span class="ms-2">Booking List</span>
+                                    <span class="ms-2">Booked Services</span>
                                 </a>
                             </li>
-                            <li class="nav-item pb-md-2">
-                                <a class="nav-link" href="#">
+                            <li class="nav-item pb-md-2" onClick={e => handleClick(e, <Comment></Comment>)}>
+                                <a class="nav-link" href="">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-chat-quote" viewBox="0 0 16 16">
                                         <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z" />
                                         <path d="M7.066 6.76A1.665 1.665 0 0 0 4 7.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 0 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 7.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 0 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z" />
@@ -83,12 +87,12 @@ const SideBar = ({setTab}) => {
                             <span class="ms-2">Manage Services</span>
                         </a>
                     </li>
-                    <li class="nav-item pb-md-2">
+                    <li class="nav-item pb-md-2" onClick={e => handleClick(e, <ManageOrder></ManageOrder>)}>
                         <a class="nav-link" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-view-list" viewBox="0 0 16 16">
                                 <path d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H3zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2zm0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14z" />
                             </svg>
-                            <span class="ms-2">Orders</span>
+                            <span class="ms-2">Manage Orders</span>
                         </a>
                     </li>
                     <li class="nav-item pb-md-2" onClick={e => handleClick(e, <AddAdmin></AddAdmin>)}>

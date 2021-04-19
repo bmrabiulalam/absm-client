@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import LoginHome from './components/Login/LoginHome/LoginHome';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
 // import AllPatients from './components/AllPatients/AllPatients/AllPatients';
-import AddAdmin from './components/AddAdmin/AddAdmin';
+import AddAdmin from './components/Admin/AddAdmin/AddAdmin';
 import Contact from './components/Contact/Contact/Contact';
 
 export const UserContext = createContext();
@@ -22,23 +22,11 @@ function App() {
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
         <Switch>
-          {/* <Route path="/appointment">
-            <Appointment></Appointment>
-          </Route> */}
           {/* <PrivateRoute path="/dashboard">
             <Dashboard></Dashboard>
           </PrivateRoute> */}
           <Route path="/dashboard">
             <Dashboard></Dashboard>
-          </Route>
-          {/* <PrivateRoute path="/allPatients">
-            <AllPatients></AllPatients>
-          </PrivateRoute> */}
-          {/* <PrivateRoute path="/addAdmin">
-            <AddAdmin></AddAdmin>
-          </PrivateRoute> */}
-          <Route path="/addAdmin">
-            <AddAdmin></AddAdmin>
           </Route>
           <Route path="/contact">
             <Contact />

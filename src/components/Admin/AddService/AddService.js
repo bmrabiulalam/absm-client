@@ -6,7 +6,9 @@ const AddService = () => {
     const setData = (field, data) => {
         const newInfo = { ...info };
         newInfo[field] = data;
+        console.log(newInfo)
         setInfo(newInfo);
+        console.log(info)
     }
 
     const handleBlur = e => {
@@ -21,12 +23,13 @@ const AddService = () => {
         setData(field, data);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = e => {
+        e.preventDefault();
         const formData = new FormData()
         formData.append('bgImage', info.bgImage);
         formData.append('icon', info.icon);
         formData.append('name', info.name);
-        formData.append('email', info.email);
+        formData.append('desc', info.desc);
 
         fetch('http://localhost:5000/addService', {
             method: 'POST',
@@ -35,6 +38,7 @@ const AddService = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                alert('New Service Added Successfully!')
             })
             .catch(error => {
                 console.error(error)
@@ -43,16 +47,16 @@ const AddService = () => {
 
     return (
         <section className="container-fluid row d-flex justify-content-center">
-            <div className="col-md-5 p-5" style={{ backgroundColor: "#F4FDFB" }}>
+            <div className="col-md-7 p-5" style={{ backgroundColor: "#F4FDFB" }}>
                 <h5 className="text-brand pb-3">Add a Service</h5>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={e => handleSubmit(e)}>
                     <div className="form-group mb-3">
                         <label htmlFor="exampleInputEmail1">Service Name</label>
-                        <input onBlur={handleBlur} type="email" className="form-control" name="email" placeholder="Enter email" />
+                        <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Enter Service Name" />
                     </div>
                     <div className="form-group mb-3">
                         <label htmlFor="exampleInputPassword1">Description</label>
-                        <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Name" />
+                        <textarea onBlur={handleBlur} class="form-control" aria-label="With textarea" name="desc" placeholder="Description"></textarea>
                     </div>
                     <div className="form-group mb-3">
                         <label htmlFor="exampleInputPassword1">Upload a background image</label>
