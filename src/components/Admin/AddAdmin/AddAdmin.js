@@ -9,9 +9,9 @@ const AddAdmin = () => {
         setInfo(newInfo);
     }
 
-    const handleSubmit = () => {
-        const formData = new FormData()
-        console.log(info);
+    const handleSubmit = e => {
+        e.preventDefault();
+        const formData = new FormData();
         formData.append('name', info.name);
         formData.append('email', info.email);
 
@@ -21,7 +21,7 @@ const AddAdmin = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                alert('New Admin Added Successfully!')
             })
             .catch(error => {
                 console.error(error)
@@ -32,7 +32,7 @@ const AddAdmin = () => {
         <section className="container-fluid row d-flex justify-content-center">
             <div className="col-md-5 p-5" style={{ backgroundColor: "#F4FDFB" }}>
                 <h5 className="text-brand pb-3">Add an Admin</h5>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={e => handleSubmit(e)}>
                     <div className="form-group pb-3">
                         <label htmlFor="exampleInputEmail1">Email address</label>
                         <input onBlur={handleBlur} type="email" className="form-control" name="email" placeholder="Enter email" />

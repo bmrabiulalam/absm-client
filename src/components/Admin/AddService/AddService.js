@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 const AddService = () => {
     const [info, setInfo] = useState({});
-    
+    const [uploading, setUploading] = useState(false);
+
     const setData = (field, data) => {
         const newInfo = { ...info };
         newInfo[field] = data;
-        console.log(newInfo)
         setInfo(newInfo);
-        console.log(info)
     }
 
     const handleBlur = e => {
@@ -25,6 +24,7 @@ const AddService = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        setUploading(true);
         const formData = new FormData()
         formData.append('bgImage', info.bgImage);
         formData.append('icon', info.icon);
@@ -37,13 +37,27 @@ const AddService = () => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                handleReset()
+                setUploading(false);
                 alert('New Service Added Successfully!')
             })
             .catch(error => {
                 console.error(error)
             })
     }
+
+    const handleReset = () => {
+        // Select all the input elements on the page and reset
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+        );
+
+        Array.from(document.querySelectorAll("textarea")).forEach(
+            textarea => (textarea.value = "")
+        );
+
+        setInfo({});
+    };
 
     return (
         <section className="container-fluid row d-flex justify-content-center">
@@ -66,7 +80,18 @@ const AddService = () => {
                         <label htmlFor="exampleInputPassword1">Upload an icon</label>
                         <input onChange={handleFileChange} type="file" className="form-control" name='icon' id="exampleInputPassword1" placeholder="Picture" />
                     </div>
-                    <button type="submit" className="btn btn-info text-white">Submit</button>
+                    <div className="d-flex justify-content-start">
+                        <button type="submit" className="btn btn-info text-white">Submit</button>
+
+                        {
+                            uploading &&
+                            <div class="ms-3 text-info">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </form>
             </div>
         </section>

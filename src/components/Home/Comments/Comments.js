@@ -1,37 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommentDetails from '../CommentDetails/CommentDetails.js';
-import img1 from '../../../images/man11s.jpg';
-import img2 from '../../../images/man22s.jpg';
-import img3 from '../../../images/man33s.jpg';
-
-const commentsData = [
-    {
-        id: 1, 
-        img: img1, 
-        name: 'John Doe', 
-        designation: 'CEO', 
-        company: 'XYZ Shipping Line', 
-        comment: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta vitae reiciendis, eveniet voluptatum autem aliquid nam ex illo numquam eos officia, impedit doloribus possimus nisi maxime optio ratione.'
-    },
-    {
-        id: 2, 
-        img: img2, 
-        name: 'Mike Berry', 
-        designation: 'MD', 
-        company: 'Some Ship Management Company Ltd', 
-        comment: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta vitae reiciendis, eveniet voluptatum autem aliquid nam ex illo numquam eos officia, impedit doloribus possimus nisi maxime optio ratione.'
-    },
-    {
-        id: 3, 
-        img: img3, 
-        name: 'John Smith', 
-        designation: 'Chairman', 
-        company: 'Double Shipping Line', 
-        comment: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta vitae reiciendis, eveniet voluptatum autem aliquid nam ex illo numquam eos officia, impedit doloribus possimus nisi maxime optio ratione.'
-    }
-]
 
 const Comments = () => {
+    const [comments, setComments] = useState([]);
+    
+    useEffect(() => {
+        fetch('http://localhost:5000/comments').
+        then(res => res.json())
+        .then(data => setComments(data))
+    }, []);
+
+    console.log(comments)
+
     return (
         <section id="client-comments" class="container my-5 py-5 px-md-5">
             <div class="row row-cols-1 row-cols-md-2 align-items-center">
@@ -42,7 +22,15 @@ const Comments = () => {
                     <div id="carouselExampleFade" class="carousel slide carousel-slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             {
-                                commentsData.map(comment => <CommentDetails comment={comment} />)
+                                comments?.length > 0
+                                ?
+                                comments.map((comment, index) => <CommentDetails index={index} comment={comment} />)
+                                :
+                                <div class="text-center my-2 py-2 text-info">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
                             }
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"  data-bs-slide="prev">

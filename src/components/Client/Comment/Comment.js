@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const Comment = () => {
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
+    const [uploading, setUploading] = useState(false);
 
     const handleBlur = e => {
         const newInfo = { ...info };
@@ -15,33 +16,50 @@ const Comment = () => {
         setFile(newFile);
     }
 
-    const handleSubmit = () => {
-        const formData = new FormData()
+    const handleSubmit = e => {
+        e.preventDefault();
+        const formData = new FormData();
+        setUploading(true);
 
         formData.append('name', info.name);
-        formData.append('designation', info.email);
-        formData.append('company', info.email);
-        formData.append('comment', info.email);
-        formData.append('file', file);
+        formData.append('designation', info.designation);
+        formData.append('company', info.company);
+        formData.append('comment', info.comment);
+        formData.append('image', file);
 
-        fetch('http://localhost:5000/addADoctor', {
+        fetch('http://localhost:5000/addComment', {
             method: 'POST',
             body: formData
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                handleReset()
+                setUploading(false);
+                alert('Your Comment Added Successfully!')
             })
             .catch(error => {
                 console.error(error)
             })
     }
 
+    const handleReset = () => {
+        // Select all the input elements on the page and reset
+        Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+        );
+
+        Array.from(document.querySelectorAll("textarea")).forEach(
+            textarea => (textarea.value = "")
+        );
+
+        setInfo({});
+    };
+
     return (
         <section className="container-fluid row d-flex justify-content-center">
             <div className="col-md-7 p-5" style={{ backgroundColor: "#F4FDFB" }}>
                 <h5 className="text-brand mb-4">Add Your Comment</h5>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={e => handleSubmit(e)}>
                     <div className="form-group mb-3">
                         <label htmlFor="exampleInputPassword1">Name</label>
                         <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Name" />
@@ -62,7 +80,18 @@ const Comment = () => {
                         <label htmlFor="exampleInputPassword1">Upload an image</label>
                         <input onChange={handleFileChange} type="file" className="form-control" id="exampleInputPassword1" placeholder="Picture" />
                     </div>
-                    <button type="submit" className="btn btn-info text-white">Submit</button>
+                    <div className="d-flex justify-content-start">
+                        <button type="submit" className="btn btn-info text-white">Submit</button>
+
+                        {
+                            uploading &&
+                            <div class="ms-3 text-info">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </form>
             </div>
         </section>
