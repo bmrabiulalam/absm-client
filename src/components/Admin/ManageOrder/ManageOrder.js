@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import OrderRow from './OrderRow';
 
 const ManageOrder = () => {
-    // const {id, name, icon} = service;
-    const id = 12;
-    const handleDelete = id => { }
+    const [bookingOrder, setBookingOrder] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/bookings')
+            .then(res => res.json())
+            .then(data => setBookingOrder(data))
+    }, [])
 
     return (
         <section className="container-fluid row d-flex justify-content-center">
@@ -17,61 +22,14 @@ const ManageOrder = () => {
                             <th scope="col">Email</th>
                             <th scope="col">Service Name</th>
                             <th scope="col">Payment Method</th>
-                            <th scope="col">Manage</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Change Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>otto@mail.com</td>
-                            <td>Medicine Store Service</td>
-                            <td>Stripe</td>
-                            <td>
-                                <div class="input-group">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Status</button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Done</a></li>
-                                        <li><a class="dropdown-item" href="#">On Going</a></li>
-                                        <li><a class="dropdown-item" href="#">Pending</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Mark</td>
-                            <td>otto@mail.com</td>
-                            <td>Medicine Store Service</td>
-                            <td>Stripe</td>
-                            <td>
-                                <div class="input-group">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Status</button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Done</a></li>
-                                        <li><a class="dropdown-item" href="#">On Going</a></li>
-                                        <li><a class="dropdown-item" href="#">Pending</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Mark</td>
-                            <td>otto@mail.com</td>
-                            <td>Medicine Store Service</td>
-                            <td>Stripe</td>
-                            <td>
-                                <div class="input-group">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Status</button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Done</a></li>
-                                        <li><a class="dropdown-item" href="#">On Going</a></li>
-                                        <li><a class="dropdown-item" href="#">Pending</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                        {
+                            bookingOrder.map(booking => <OrderRow order={booking} ></OrderRow>)
+                        }
                     </tbody>
                 </table>
             </div>

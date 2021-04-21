@@ -1,11 +1,18 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import './ServicesDetail.css';
 
 const ServicesDetail = ({service}) => {
-    const {name, desc, bgImg, iconImg} = service;
+    const {_id, name, desc, bgImage, iconImg} = service;
+    const history = useHistory();
+
+    const handleBooking = e => {
+        e.preventDefault();
+        history.push('/service/book/'+_id);
+    }
 
     const bgStyle = {
-        backgroundImage: `url("data:${bgImg.contentType};base64,${bgImg.img}")`, 
+        backgroundImage: `url("${bgImage}")`, 
         width: '250px', 
         backgroundSize: 'cover', 
         height: '320px'
@@ -17,7 +24,7 @@ const ServicesDetail = ({service}) => {
                 <img style={{width: '70px', alignSelf: 'center', marginBottom: '10px'}} src={`data:${iconImg.contentType};base64,${iconImg.img}`} alt=""/>
                 <h4>{name}</h4>
                 <p>{desc}</p>
-                <button className="btn btn-warning text-white">Book Service</button>
+                <button className="btn btn-warning text-white" onClick={handleBooking}>Book Service</button>
             </div>
         </div>
     );

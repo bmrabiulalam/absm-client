@@ -6,13 +6,11 @@ import {
   Route
 } from "react-router-dom";
 import Home from './components/Home/Home/Home';
-// import Appointment from './components/Appointment/Appointment/Appointment';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import LoginHome from './components/Login/LoginHome/LoginHome';
 import PrivateRoute from './components/Login/PrivateRoute/PrivateRoute';
-// import AllPatients from './components/AllPatients/AllPatients/AllPatients';
-import AddAdmin from './components/Admin/AddAdmin/AddAdmin';
 import Contact from './components/Contact/Contact/Contact';
+import NotFound from './components/shared/NotFound/NotFound';
 
 export const UserContext = createContext();
 
@@ -22,12 +20,15 @@ function App() {
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
         <Switch>
-          {/* <PrivateRoute path="/dashboard">
+          <PrivateRoute path="/dashboard">
             <Dashboard></Dashboard>
-          </PrivateRoute> */}
-          <Route path="/dashboard">
-            <Dashboard></Dashboard>
-          </Route>
+          </PrivateRoute>
+          <PrivateRoute path="/service/book/:id">
+            <Dashboard tabName={'BookService'}></Dashboard>
+          </PrivateRoute>
+          <PrivateRoute path="/admin">
+            <Dashboard />
+          </PrivateRoute>
           <Route path="/contact">
             <Contact />
           </Route>
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route exact path="/home">
             <Home></Home>
+          </Route>
+          <Route path="*">
+            <NotFound />
           </Route>
         </Switch>
       </Router>

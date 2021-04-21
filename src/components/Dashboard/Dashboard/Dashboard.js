@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Dashboard.css';
 import logo from "../../../images/fav-icon.png";
 import SideBar from '../SideBar/SideBar';
+import BookService from '../../Client/BookService/BookService';
+import BookedServices from '../../Client/BookedServices/BookedServices';
+import { UserContext } from '../../../App';
+import ManageOrder from '../../Admin/ManageOrder/ManageOrder';
+let DefaultTab = null;
 
 const style = {
     logo: {
@@ -16,8 +21,23 @@ const style = {
     }
 }
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     const [tab, setTab] = useState(null);
+    const [loggedInUser, ] = useContext(UserContext);
+
+    if (props?.tabName) {
+        if (props.tabName === 'BookService') {
+            DefaultTab = <BookService></BookService>;
+        }
+    }
+    else {
+        if (loggedInUser?.isAdmin) {
+            DefaultTab = <ManageOrder></ManageOrder>;
+        }
+        else {
+            DefaultTab = <BookedServices></BookedServices>;
+        }
+    }
 
     return (
         <section>
@@ -35,8 +55,8 @@ const Dashboard = () => {
             <div class="container-fluid">
                 <div class="row">
                     <SideBar setTab={setTab}></SideBar>
-                    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4" style={{position: "absolute", right: 0}}>
-                        {tab}
+                    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4" style={{ position: "absolute", right: 0 }}>
+                        {tab || DefaultTab}
                     </main>
                 </div>
             </div>

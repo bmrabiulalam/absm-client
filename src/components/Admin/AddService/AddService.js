@@ -22,6 +22,29 @@ const AddService = () => {
         setData(field, data);
     }
 
+    const handleImageUpload = e => {
+        setUploading(true);
+        const imageData = new FormData();
+        imageData.set('key', '396c9f1d9024868f3ecef6aaa44cbd7b');
+        imageData.append('image', e.target.files[0]);
+        console.log(e.target.files[0]);
+
+        fetch('https://api.imgbb.com/1/upload', {
+            method: 'POST',
+            body: imageData
+        })
+        .then(res => res.json())
+            .then(data => {
+                const newInfo = { ...info };
+                newInfo.bgImage = data.data.display_url;
+                setInfo(newInfo);
+                setUploading(false);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
         setUploading(true);
@@ -73,8 +96,8 @@ const AddService = () => {
                         <textarea onBlur={handleBlur} class="form-control" aria-label="With textarea" name="desc" placeholder="Description"></textarea>
                     </div>
                     <div className="form-group mb-3">
-                        <label htmlFor="exampleInputPassword1">Upload a background image</label>
-                        <input onChange={handleFileChange} type="file" className="form-control" name='bgImage' id="exampleInputPassword1" placeholder="Picture" />
+                        <label htmlFor="exampleInputPassword1">Upload a background image {uploading ? '(uploading...)' : ''}</label>
+                        <input onChange={handleImageUpload} type="file" className="form-control" name='bgImage' id="exampleInputPassword1" placeholder='' />
                     </div>
                     <div className="form-group mb-3">
                         <label htmlFor="exampleInputPassword1">Upload an icon</label>

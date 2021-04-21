@@ -46,7 +46,7 @@ const ServicesList = () => {
                     itemClass="carousel-item-padding-10-px"
                     responsive={responsive}>
                     {
-                        services.map(service => <ServicesDetail service={service} />)
+                        services.map(service => <ServicesDetail key={service._id} service={service} />)
                     }
                 </Carousel>
                 :

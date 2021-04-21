@@ -23,16 +23,42 @@ const Login = () => {
     firebase.initializeApp(firebaseConfig);
   }
 
+  const checkIsAdmin = () => {
+    const emailID = loggedInUser.email;
+
+    fetch('http://localhost:5000/isAdmin', {
+      method: 'POST',
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ emailID })
+    })
+      .then(res => res.json())
+      .then(data => {
+        const user = {...loggedInUser};
+        user.isAdmin = data;
+        setLoggedInUser(user);
+      })
+  }
+  
+  // loggedInUser?.email && checkIsAdmin()
+  loggedInUser?.email && console.log('loggedInUser', loggedInUser)
+
   const handleGoogleSignIn = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function (result) {
       const { displayName, photoURL, email } = result.user;
-      const signedInUser = { name: displayName, photoURL, email, signOut: false }
+
+      const signedInUser = {
+          isAdmin: false,
+          name: displayName,
+          email: email,
+          photo: photoURL,
+          signOut: false
+      }
+
       setLoggedInUser(signedInUser);
       storeAuthToken();
     }).catch(function (error) {
       const errorMessage = error.message;
-      console.log(errorMessage);
     });
   }
 
@@ -40,7 +66,7 @@ const Login = () => {
     firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
       .then(function (idToken) {
         sessionStorage.setItem('token', idToken);
-        history.replace(from);
+        // history.replace(from);
       }).catch(function (error) {
         // Handle error
       });
@@ -51,6 +77,7 @@ const Login = () => {
       .then(() => {
         // Sign-out successful.
         const loggedInUser = {
+          isAdmin: false,
           name: '',
           email: '',
           photoURL: '',
@@ -59,13 +86,11 @@ const Login = () => {
 
         sessionStorage.removeItem('token');
         setLoggedInUser(loggedInUser);
-        console.log('google sign out')
         history.replace(from);
       })
   }
 
   if (loggedInUser?.signOut) {
-    console.log('sign out true')
     signOut();
   }
 

@@ -1,56 +1,47 @@
-import React from 'react';
-
-const bookingData = [
-    {
-        icon: '',
-        status: 'Done',
-        title: 'Info card title',
-        desc: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-    },
-    {
-        icon: '',
-        status: 'Pending',
-        title: 'Info card title',
-        desc: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-    },
-    {
-        icon: '',
-        status: 'On Goning',
-        title: 'Info card title',
-        desc: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-    },
-]
+import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../../../App';
 
 const BookedServices = () => {
+    const [loggedInUser, ] = useContext(UserContext);
+    const [bookingData, setBookingData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/bookingsByClient/'+loggedInUser.email)
+            .then(res => res.json())
+            .then(data => setBookingData(data))
+    }, [])
+
     return (
         <div className="d-flex justify-content-evenly">
             {
-                bookingData.map(data => {
+                bookingData.map(booking => {
+                    console.log(booking)
+                    const {service, status} = booking;
                     let statusClasses = '';
                     let cardClasses = 'card m-2 ';
-                    
-                    if(data.status === 'Done'){
+
+                    if (booking.status === 'Done') {
                         statusClasses = 'bg-success text-white px-4 py-2 rounded-3';
-                        cardClasses+='border-success';
+                        cardClasses += 'border-success';
                     }
-                    else if(data.status === 'Pending'){
+                    else if (booking.status === 'Pending') {
                         statusClasses = 'bg-danger text-white px-4 py-2 rounded-3';
-                        cardClasses+='border-danger';
+                        cardClasses += 'border-danger';
                     }
                     else {
                         statusClasses = 'bg-warning text-white px-4 py-2 rounded-3';
-                        cardClasses+='border-warning';
+                        cardClasses += 'border-warning';
                     }
 
                     return (
-                        <div class={cardClasses} style={{maxWidth: '20rem'}}>
+                        <div class={cardClasses} style={{ maxWidth: '20rem' }}>
                             <div class="card-header d-flex justify-content-between">
-                                <p>icon</p>
-                                <p className={statusClasses}>{data.status}</p>
+                                <p><img style={{height: '30px'}} src={`data:${service?.iconImg?.contentType};base64,${service?.iconImg?.img}`} alt="" /></p>
+                                <p className={statusClasses}>{status}</p>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">{data.title}</h5>
-                                <p class="card-text">{data.desc}</p>
+                                <h5 class="card-title">{service?.name}</h5>
+                                <p class="card-text">{service?.desc}</p>
                             </div>
                         </div>
                     )

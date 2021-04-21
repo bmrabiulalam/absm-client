@@ -10,17 +10,24 @@ import ErrorMessage from "../FormField/ErrorMessage";
 import SubmitButton from "../FormField/SubmitButton";
 import CardField from "../CardField/CardField";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({user, service, handlePayment}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState(null);
     const [cardComplete, setCardComplete] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState(null);
+
     const [billingDetails, setBillingDetails] = useState({
-        email: "",
+        email: user.email,
         phone: "",
-        name: ""
+        name: user.name
+    });
+    
+    const [shipmentDetails, setShipmentDetails] = useState({
+        service: service.name,
+        address: "",
+        paymentMethod: 'Stripe'
     });
 
     const handleSubmit = async (event) => {
@@ -53,6 +60,7 @@ const CheckoutForm = () => {
             setError(payload.error);
         } else {
             setPaymentMethod(payload.paymentMethod);
+            handlePayment({...billingDetails, ...shipmentDetails}, payload.paymentMethod.id);
         }
     };
 
@@ -64,6 +72,11 @@ const CheckoutForm = () => {
             email: "",
             phone: "",
             name: ""
+        });
+        setShipmentDetails({
+            service: "",
+            address: "",
+            paymentMethod: ""
         });
     };
 
@@ -81,6 +94,16 @@ const CheckoutForm = () => {
     ) : (
             <form className="Form" onSubmit={handleSubmit}>
                 <fieldset className="FormGroup">
+                    <Field
+                        label="Service"
+                        id="service"
+                        type="text"
+                        placeholder={shipmentDetails.service}
+                        required
+                        disabled
+                        autoComplete="service"
+                        value={shipmentDetails.service}
+                    />
                     <Field
                         label="Name"
                         id="name"
@@ -118,15 +141,15 @@ const CheckoutForm = () => {
                         }}
                     />
                     <Field
-                        label="Service"
-                        id="service"
+                        label="Address"
+                        id="address"
                         type="text"
-                        placeholder="Bunker & Lube Oil Supply"
+                        placeholder="Banani, Dhaka, Bangladesh"
                         required
-                        autoComplete="service"
-                        value={billingDetails.service}
+                        autoComplete="address"
+                        value={shipmentDetails.address}
                         onChange={(e) => {
-                            setBillingDetails({ ...billingDetails, service: e.target.value });
+                            setShipmentDetails({ ...shipmentDetails, address: e.target.value });
                         }}
                     />
                 </fieldset>
