@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam">
+  <a href="https://github.com/bmrabiulalam/absm-client">
   </a>
 
   <h3 align="center">AB SHIP MANAGEMENT</h3>
@@ -7,16 +7,16 @@
   <p align="center">
     An awesome site to find all the ship management services.
     <br />
-    <a href="https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/bmrabiulalam/absm-client"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://ab-ship-management.web.app/">View AB SHIP MANAGEMENT Live Demo</a>
     ·
-    <a href="https://github.com/Porgramming-Hero-web-course/complete-website-server-bmrabiulalam">Back End Repo</a>
+    <a href="https://github.com/bmrabiulalam/absm-server">Back End Repo</a>
     .
     <a href="https://abshipmanagement.herokuapp.com">Backend API</a>
     ·
-    <a href="https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam/issues">Request Feature</a>
+    <a href="https://github.com/bmrabiulalam/absm-client/issues">Request Feature</a>
   </p>
 </p>
 
@@ -96,7 +96,7 @@ To get a local copy up and running follow these simple example steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam.git
+   git clone https://github.com/bmrabiulalam/absm-client.git
    ```
 2. Go to the project folder
    ```sh
@@ -122,7 +122,7 @@ To get a local copy up and running follow these simple example steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/bmrabiulalam/absm-client/issues) for a list of proposed features (and known issues).
 
 
 <!-- CONTRIBUTING -->
@@ -142,7 +142,7 @@ Contributions are what make the open source community such an amazing place to b
 
 Muhammad Rabiul Alam - [@bm_rabiulalam](https://twitter.com/bm_rabiulalam) - bmrabiulalam@gmail.com
 
-Project Link: [https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam](https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam)
+Project Link: [https://github.com/bmrabiulalam/absm-client](https://github.com/bmrabiulalam/absm-client)
 
 
 <!-- ACKNOWLEDGEMENTS -->

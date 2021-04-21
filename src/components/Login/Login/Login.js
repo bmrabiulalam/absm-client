@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from './firebase.config';
@@ -15,6 +15,7 @@ const btnStyle = {
 
 const Login = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const [adminChecked, setAdminChecked] = useState(false);
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
@@ -44,7 +45,10 @@ const Login = () => {
       })
   }
   
-  loggedInUser?.email && checkIsAdmin()
+  if(loggedInUser?.email && !adminChecked) {
+    checkIsAdmin();
+    setAdminChecked(true);
+  }
 
   const handleGoogleSignIn = () => {
     var provider = new firebase.auth.GoogleAuthProvider();

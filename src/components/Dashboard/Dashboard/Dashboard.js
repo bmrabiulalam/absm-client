@@ -59,7 +59,7 @@ const Dashboard = (props) => {
                     <div class="row">
                         <SideBar setTab={setTab}></SideBar>
                         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4" style={{ position: "absolute", right: 0 }}>
-                            {DefaultTab || tab}
+                            {tab || DefaultTab}
                         </main>
                     </div>
                     :
