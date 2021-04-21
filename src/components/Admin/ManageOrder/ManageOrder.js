@@ -28,7 +28,7 @@ const ManageOrder = () => {
                     </thead>
                     <tbody>
                         {
-                            bookingOrder.map(booking => <OrderRow order={booking} ></OrderRow>)
+                            bookingOrder.map((booking, index) => <OrderRow key={booking._id} index={index} order={booking} ></OrderRow>)
                         }
                     </tbody>
                 </table>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const OrderRow = ({ order }) => {
+const OrderRow = ({ order, index }) => {
     const { _id, paymentMethod, status, user, service } = order;
     const [currentStatus, setCurrentStatus] = useState(status);
 
@@ -32,7 +32,7 @@ const OrderRow = ({ order }) => {
 
     return (
         <tr style={{fontSize: '.8rem'}}>
-            <th scope="row">1</th>
+            <th scope="row">{index + 1}</th>
             <td>{user?.name}</td>
             <td>{user?.email}</td>
             <td>{service?.name}</td>
