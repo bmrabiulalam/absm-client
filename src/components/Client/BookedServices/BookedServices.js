@@ -6,7 +6,7 @@ const BookedServices = () => {
     const [bookingData, setBookingData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/bookingsByClient/'+loggedInUser.email)
+        fetch('https://abshipmanagement.herokuapp.com/bookingsByClient/'+loggedInUser.email)
             .then(res => res.json())
             .then(data => setBookingData(data))
     }, [])

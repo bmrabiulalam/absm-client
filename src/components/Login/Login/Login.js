@@ -26,7 +26,7 @@ const Login = () => {
   const checkIsAdmin = () => {
     const emailID = loggedInUser.email;
 
-    fetch('http://localhost:5000/isAdmin', {
+    fetch('https://abshipmanagement.herokuapp.com/isAdmin', {
       method: 'POST',
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ emailID })
@@ -36,11 +36,15 @@ const Login = () => {
         const user = {...loggedInUser};
         user.isAdmin = data;
         setLoggedInUser(user);
+        if(data){
+          history.replace('/dashboard');
+        }else{
+          history.replace(from);
+        }
       })
   }
   
-  // loggedInUser?.email && checkIsAdmin()
-  loggedInUser?.email && console.log('loggedInUser', loggedInUser)
+  loggedInUser?.email && checkIsAdmin()
 
   const handleGoogleSignIn = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -58,7 +62,7 @@ const Login = () => {
       setLoggedInUser(signedInUser);
       storeAuthToken();
     }).catch(function (error) {
-      const errorMessage = error.message;
+      // const errorMessage = error.message;
     });
   }
 
@@ -66,7 +70,6 @@ const Login = () => {
     firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
       .then(function (idToken) {
         sessionStorage.setItem('token', idToken);
-        // history.replace(from);
       }).catch(function (error) {
         // Handle error
       });

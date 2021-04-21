@@ -25,6 +25,7 @@ const Navbar = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     const handleSignout = e => {
+        e.preventDefault();
         const signedOutUser = {
             name: '',
             email: '',
@@ -41,7 +42,7 @@ const Navbar = () => {
     return (
         <nav style={style.myNavbar} class="my-navbar navbar navbar-expand-lg navbar-light fixed-top">
             <div class="container-fluid">
-                <a style={style.logo} id="logo" class="navbar-brand" href="#">
+                <a style={style.logo} id="logo" class="navbar-brand" href="">
                     <img style={style.logoImg} src={logo} alt="" width="60" height="48" class="d-inline-block align-top" />
                         AB SHIP MANAGEMENT
                 </a>

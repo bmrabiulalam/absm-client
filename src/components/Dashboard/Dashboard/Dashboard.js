@@ -23,16 +23,16 @@ const style = {
 
 const Dashboard = (props) => {
     const [tab, setTab] = useState(null);
-    const [loggedInUser, ] = useContext(UserContext);
+    const [loggedInUser,] = useContext(UserContext);
 
-    if (props?.tabName) {
-        if (props.tabName === 'BookService') {
-            DefaultTab = <BookService></BookService>;
-        }
+    if (loggedInUser?.isAdmin) {
+        DefaultTab = <ManageOrder></ManageOrder>;
     }
     else {
-        if (loggedInUser?.isAdmin) {
-            DefaultTab = <ManageOrder></ManageOrder>;
+        if (props?.tabName) {
+            if (props.tabName === 'BookService') {
+                DefaultTab = <BookService></BookService>;
+            }
         }
         else {
             DefaultTab = <BookedServices></BookedServices>;
@@ -53,12 +53,22 @@ const Dashboard = (props) => {
                 </div>
             </nav>
             <div class="container-fluid">
-                <div class="row">
-                    <SideBar setTab={setTab}></SideBar>
-                    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4" style={{ position: "absolute", right: 0 }}>
-                        {tab || DefaultTab}
-                    </main>
-                </div>
+                {
+                    loggedInUser?.email
+                    ?
+                    <div class="row">
+                        <SideBar setTab={setTab}></SideBar>
+                        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4" style={{ position: "absolute", right: 0 }}>
+                            {DefaultTab || tab}
+                        </main>
+                    </div>
+                    :
+                    <div class="text-center my-5 py-5 text-info">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                }
             </div>
         </section>
     );

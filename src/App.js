@@ -20,11 +20,17 @@ function App() {
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
         <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
           <PrivateRoute path="/dashboard">
-            <Dashboard></Dashboard>
+            <Dashboard />
           </PrivateRoute>
           <PrivateRoute path="/service/book/:id">
-            <Dashboard tabName={'BookService'}></Dashboard>
+            <Dashboard tabName={'BookService'} />
           </PrivateRoute>
           <PrivateRoute path="/admin">
             <Dashboard />
@@ -33,13 +39,7 @@ function App() {
             <Contact />
           </Route>
           <Route path="/login">
-            <LoginHome></LoginHome>
-          </Route>
-          <Route exact path="/">
-            <Home></Home>
-          </Route>
-          <Route exact path="/home">
-            <Home></Home>
+            <LoginHome />
           </Route>
           <Route path="*">
             <NotFound />

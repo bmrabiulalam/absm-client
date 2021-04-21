@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import AddAdmin from '../../Admin/AddAdmin/AddAdmin';
 import AddService from '../../Admin/AddService/AddService';
@@ -8,6 +8,7 @@ import ManageService from '../../Admin/ManageService/ManageService';
 import BookedServices from '../../Client/BookedServices/BookedServices';
 import BookService from '../../Client/BookService/BookService';
 import Comment from '../../Client/Comment/Comment';
+import Login from '../../Login/Login/Login';
 
 const SideBar = ({ setTab }) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
@@ -19,6 +20,7 @@ const SideBar = ({ setTab }) => {
     }
 
     const handleLogout = e => {
+        e.preventDefault();
         const signedOutUser = {
             isAdmin: false,
             name: '',
@@ -33,7 +35,7 @@ const SideBar = ({ setTab }) => {
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block ps-3 bg-light sidebar collapse">
             <div class="position-sticky">
                 <ul class="nav flex-column">
-                    <li class="nav-item pb-md-2" onClick={history.push('/home')}>
+                    <li class="nav-item pb-md-2" onClick={() => history.replace('/home')}>
                         <a class="nav-link text-info" aria-current="page" href="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span class="ms-2">Home</span>
@@ -116,21 +118,25 @@ const SideBar = ({ setTab }) => {
                         {
                             loggedInUser?.email
                                 ?
-                                <a class="btn btn-sm btn-warning ml-3 mt-2" href="" onClick={handleLogout}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
-                                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
-                                    </svg>
-                                    <span class="ms-2">Logout</span>
-                                </a>
+                                <li class="nav-item pb-md-2" onClick={handleLogout}>
+                                    <a class="btn btn-sm btn-warning ml-3 mt-2" href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+                                            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+                                        </svg>
+                                        <span class="ms-2">Logout</span>
+                                    </a>
+                                </li>
                                 :
-                                <a class="btn btn-sm btn-info ml-3 mt-2" href="login">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
-                                        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                                    </svg>
-                                    <span class="ms-2">Login</span>
-                                </a>
+                                <li class="nav-item pb-md-2" onClick={e => handleClick(e, <Login />)}>
+                                    <a class="btn btn-sm btn-info ml-3 mt-2" href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                                            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                                        </svg>
+                                        <span class="ms-2">Login</span>
+                                    </a>
+                                </li>
                         }
                     </li>
                 </ul>

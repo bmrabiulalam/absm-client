@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 const OrderRow = ({ order }) => {
-    const { _id, paymentMethod, status } = order;
+    const { _id, paymentMethod, status, user, service } = order;
     const [currentStatus, setCurrentStatus] = useState(status);
 
     const handleSelect = e => {
         const updatedStatus = e.target.value;
 
-        fetch('http://localhost:5000/update/'+_id, {
+        fetch('https://abshipmanagement.herokuapp.com/update/'+_id, {
             method: 'PATCH',
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({ updatedStatus })
@@ -31,15 +31,15 @@ const OrderRow = ({ order }) => {
     }
 
     return (
-        <tr>
+        <tr style={{fontSize: '.8rem'}}>
             <th scope="row">1</th>
-            <td>Mark</td>
-            <td>otto@mail.com</td>
-            <td>Medicine Store Service</td>
-            <td>Stripe</td>
-            <td><p style={{ border: '2px solid', borderRadius: '12px', fontSize: '13px', fontWeight: 700 }} className={`px-1 py-2 ${statusBgColor}`}>{currentStatus}</p></td>
+            <td>{user?.name}</td>
+            <td>{user?.email}</td>
+            <td>{service?.name}</td>
+            <td style={{textAlign: 'center'}}>Stripe</td>
+            <td><p style={{ border: '2px solid', borderRadius: '12px', fontSize: '.7rem', fontWeight: 700 }} className={`px-1 py-2 ${statusBgColor}`}>{currentStatus}</p></td>
             <td>
-                <select class="form-control" onChange={handleSelect}>
+                <select style={{fontSize: '.7rem'}} class="form-control" onChange={handleSelect}>
                     <option class="dropdown-item">Change Status</option>
                     <option class="dropdown-item">Done</option>
                     <option class="dropdown-item">On Going</option>

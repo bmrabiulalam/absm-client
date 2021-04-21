@@ -27,7 +27,7 @@ const Comment = () => {
         formData.append('comment', info.comment);
         formData.append('image', file);
 
-        fetch('http://localhost:5000/addComment', {
+        fetch('https://abshipmanagement.herokuapp.com/addComment', {
             method: 'POST',
             body: formData
         })

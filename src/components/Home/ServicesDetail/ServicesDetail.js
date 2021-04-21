@@ -1,15 +1,9 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './ServicesDetail.css';
 
 const ServicesDetail = ({service}) => {
     const {_id, name, desc, bgImage, iconImg} = service;
-    const history = useHistory();
-
-    const handleBooking = e => {
-        e.preventDefault();
-        history.push('/service/book/'+_id);
-    }
 
     const bgStyle = {
         backgroundImage: `url("${bgImage}")`, 
@@ -24,7 +18,7 @@ const ServicesDetail = ({service}) => {
                 <img style={{width: '70px', alignSelf: 'center', marginBottom: '10px'}} src={`data:${iconImg.contentType};base64,${iconImg.img}`} alt=""/>
                 <h4>{name}</h4>
                 <p>{desc}</p>
-                <button className="btn btn-warning text-white" onClick={handleBooking}>Book Service</button>
+                <Link className="btn btn-warning text-white" to={'/service/book/'+_id}>Book Service</Link>
             </div>
         </div>
     );

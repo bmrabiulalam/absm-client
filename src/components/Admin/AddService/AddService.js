@@ -54,7 +54,7 @@ const AddService = () => {
         formData.append('name', info.name);
         formData.append('desc', info.desc);
 
-        fetch('http://localhost:5000/addService', {
+        fetch('https://abshipmanagement.herokuapp.com/addService', {
             method: 'POST',
             body: formData
         })

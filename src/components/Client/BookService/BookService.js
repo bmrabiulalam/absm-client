@@ -24,7 +24,7 @@ const BookService = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        fetch('http://localhost:5000/service/'+id)
+        fetch('https://abshipmanagement.herokuapp.com/service/'+id)
         .then(res => res.json())
         .then(data => setService(data[0]))
     }, [id]);
@@ -39,7 +39,7 @@ const BookService = () => {
             orderTime: new Date() 
         };
 
-        fetch('http://localhost:5000/bookService', {
+        fetch('https://abshipmanagement.herokuapp.com/bookService', {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(orderDetails)
