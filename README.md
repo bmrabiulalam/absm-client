@@ -1,22 +1,22 @@
 <p align="center">
-  <a href="https://github.com/Porgramming-Hero-web-course/full-stack-client-bmrabiulalam">
+  <a href="https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam">
   </a>
 
-  <h3 align="center">PURE GOODS</h3>
+  <h3 align="center">AB SHIP MANAGEMENT</h3>
 
   <p align="center">
-    An awesome site to find all the pure consumer products.
+    An awesome site to find all the ship management services.
     <br />
-    <a href="https://github.com/Porgramming-Hero-web-course/full-stack-client-bmrabiulalam"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://pure-goods.web.app/">View Pure Goods Demo</a>
+    <a href="https://ab-ship-management.web.app/">View Pure Goods Demo</a>
     ·
     <a href="https://github.com/Porgramming-Hero-web-course/full-stack-server-bmrabiulalam">Back End Repo</a>
     .
     <a href="https://abshipmanagement.herokuapp.com">Backend API</a>
     ·
-    <a href="https://github.com/Porgramming-Hero-web-course/full-stack-client-bmrabiulalam/issues">Request Feature</a>
+    <a href="https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam/issues">Request Feature</a>
   </p>
 </p>
 
@@ -51,7 +51,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-There are many great codes available on GitHub, however, I tried to give it a shot with react js, react router, react context and material ui and created this project.
+This is complete website with backend api server with database server and a nice frontend. To access the dashboard user of this website must login with their gmail account. If the account is already save as admin, then the user is redirected to admin dashboard, otherwise the user is redirected to user dashboard.
+
+In the admin dashboard, admin can create and delete services and manage client's service bookings.
+
+In the user dashboard, user can book service, look up for their previously booked services status and add comment for the service provider.
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
@@ -61,7 +65,7 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 * Firebase Hosting
 * Heroku backend hosting
 * MongoDB backend database hosting
-* Admin Panel
+* Admin and Client Dashboard
 
 ### Built With
 
@@ -70,7 +74,7 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 * [JavaScript](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
 * [React JS](https://reactjs.org/)
 * [React Router](https://reactrouter.com/)
-* [Material UI](https://material-ui.com/)
+* [Bootstrap 5](https://getbootstrap.com/)
 * [Firebase Authentication & Frontend Hosting](https://firebase.com/)
 * [Heroku Server Backend Hosting](https://heroku.com/)
 * [Mongodb Database Hosting](https://mongodb.com/)
@@ -92,7 +96,7 @@ To get a local copy up and running follow these simple example steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Porgramming-Hero-web-course/full-stack-client-bmrabiulalam.git
+   git clone https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam.git
    ```
 2. Go to the project folder
    ```sh
@@ -118,7 +122,7 @@ To get a local copy up and running follow these simple example steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/Porgramming-Hero-web-course/full-stack-client-bmrabiulalam/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam/issues) for a list of proposed features (and known issues).
 
 
 <!-- CONTRIBUTING -->
@@ -138,7 +142,7 @@ Contributions are what make the open source community such an amazing place to b
 
 Muhammad Rabiul Alam - [@bm_rabiulalam](https://twitter.com/bm_rabiulalam) - bmrabiulalam@gmail.com
 
-Project Link: [https://github.com/Porgramming-Hero-web-course/full-stack-client-bmrabiulalam](https://github.com/Porgramming-Hero-web-course/full-stack-client-bmrabiulalam)
+Project Link: [https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam](https://github.com/Porgramming-Hero-web-course/complete-website-client-bmrabiulalam)
 
 
 <!-- ACKNOWLEDGEMENTS -->
@@ -146,7 +150,7 @@ Project Link: [https://github.com/Porgramming-Hero-web-course/full-stack-client-
 * [README-Template](https://github.com/bmrabiulalam/Best-README-Template)
 * [React JS](https://reactjs.org/)
 * [React Router](https://reactrouter.com/)
-* [Material UI](https://material-ui.com/)
+* [Bootstrap 5](https://getbootstrap.com/)
 * [Firebase Authentication & Hosting](https://firebase.com/)
 * [Heroku Server Backend Hosting](https://heroku.com/)
 * [Mongodb Database Hosting](https://mongodb.com/)
