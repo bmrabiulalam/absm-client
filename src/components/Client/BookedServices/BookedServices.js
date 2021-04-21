@@ -12,7 +12,7 @@ const BookedServices = () => {
     }, [])
 
     return (
-        <div className="d-flex justify-content-evenly">
+        <div className="d-flex flex-wrap justify-content-evenly">
             {
                 bookingData.map(booking => {
                     console.log(booking)
@@ -34,7 +34,7 @@ const BookedServices = () => {
                     }
 
                     return (
-                        <div class={cardClasses} style={{ maxWidth: '20rem' }}>
+                        <div class={cardClasses} style={{ maxWidth: '20rem', minWidth: '15rem' }}>
                             <div class="card-header d-flex justify-content-between">
                                 <p><img style={{height: '30px'}} src={`data:${service?.iconImg?.contentType};base64,${service?.iconImg?.img}`} alt="" /></p>
                                 <p className={statusClasses}>{status}</p>
